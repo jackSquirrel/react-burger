@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import BurgerIngredientItem from '../burger-ingredients-item/burger-ingredients-item';
 import styles from './burger-ingredients-group.module.css';
+import { ingredientPropTypes } from '../../propTypes/propTypes';
 
 import '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -17,25 +18,11 @@ function BurgerIngredientGroup(props: any) {
         </div>
         )
     }
-    
-const itemsPropTypes = PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    proteins: PropTypes.number,
-    fat: PropTypes.number,
-    carbohydrates: PropTypes.number,
-    calories: PropTypes.number,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string,
-    image_mobile: PropTypes.string,
-    image_large: PropTypes.string,
-    __v: PropTypes.number
-})
 
+// PropTypes для компонента 
 BurgerIngredientGroup.propTypes = {
     title: PropTypes.string.isRequired,
-    items: PropTypes.arrayOf(itemsPropTypes.isRequired)
+    items: PropTypes.arrayOf(ingredientPropTypes.isRequired)
 }
 
 export default BurgerIngredientGroup;

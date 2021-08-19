@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './burger-constructor.module.css';
 import TotalAmount from '../total-amount/total-amount';
+import { ingredientPropTypes } from '../../propTypes/propTypes';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 // Компонент конструктора бургера
@@ -43,9 +45,17 @@ function BurgerConstructor(props: any) {
                     thumbnail={bun.image}
                 />
             </div>
-            <TotalAmount total="630"/>
+            <TotalAmount total={ 630 }/>
         </section>
     )
+}
+
+// PropTypes компонента
+BurgerConstructor.propTypes = {
+    data: PropTypes.shape({
+        bun: ingredientPropTypes,
+        main: PropTypes.arrayOf(ingredientPropTypes)
+    })
 }
 
 export default BurgerConstructor;

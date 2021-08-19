@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './app-header-item.module.css';
 
@@ -12,6 +13,14 @@ function HeaderItem(props: any) {
             </div>
         </a>
     )
+}
+
+// PropTypes компонента
+HeaderItem.propTypes = {
+    link: PropTypes.string.isRequired,
+    textClasses: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    children: PropTypes.element
 }
 
 export default HeaderItem;

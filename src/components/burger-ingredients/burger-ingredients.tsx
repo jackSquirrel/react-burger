@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
+import { ingredientPropTypes } from '../../propTypes/propTypes';
 import Tabs from '../tabs/tabs';
 import BurgerIngredientGroup from '../burger-ingredients-group/burger-ingredients-group';
 import styles from './burger-ingredients.module.css';
@@ -19,6 +21,11 @@ function BurgerIngredients(props: any) {
             </div>
         </section>
     )
+}
+
+// PropTypes компонента
+BurgerIngredients.propTypes = {
+    data: PropTypes.arrayOf(ingredientPropTypes)
 }
 
 export default BurgerIngredients;
