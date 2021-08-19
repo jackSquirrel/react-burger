@@ -1,0 +1,9 @@
+.nav__item {
+    display: inline-block;
+    margin-right: 8px;
+    text-decoration: none;
+}
+
+.nav__item:last-child {
+    margin-right: 0;
+}

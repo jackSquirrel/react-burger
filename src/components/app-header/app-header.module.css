@@ -17,29 +17,10 @@
 .logo {
     position: absolute;
     width: 290px;
+    height: 50px;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-}
-
-.nav__item {
-    display: inline-block;
-    margin-right: 8px;
-    text-decoration: none;
-}
-
-.nav__item:last-child {
-    margin-right: 0;
-}
-
-.text {
-    margin-left: 8px;
-}
-
-.link {
-    -webkit-tap-highlight-color: transparent;
-    text-decoration: none;
-    color: inherit;
 }

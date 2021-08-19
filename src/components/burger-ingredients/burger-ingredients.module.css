@@ -1,6 +1,11 @@
+.section {
+    max-width: 600px;
+    height: 912px;
+}
+
 .container {
-    max-height: 912px;
-    overflow-y: scroll;
+    height: 716px;
+    overflow-y: auto;
 }
 
 .container::-webkit-scrollbar {

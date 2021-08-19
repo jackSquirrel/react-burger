@@ -1,9 +1,10 @@
 import React from 'react';
 
-import styles from './burger-ingredient-item.module.css';
+import styles from './burger-ingredients-item.module.css';
 
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
+// Компонент карточки ингридиента
 function BurgerIngredientItem(props: any) {
     return (
         <div className={`mb-8 ${ styles.container }`}>
