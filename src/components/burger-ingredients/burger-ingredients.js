@@ -9,15 +9,15 @@ import styles from './burger-ingredients.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components';
 
 // Компонент выбора ингредиентов
-function BurgerIngredients(props: any) {
+function BurgerIngredients(props) {
     return (
         <section className={styles.section }>
             <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
             <Tabs />
             <div className={`mt-10 ${ styles.container }`}>
-                <BurgerIngredientGroup title="Булки" items={props.data.filter((item: any) => item.type === 'bun')}/>
-                <BurgerIngredientGroup title="Соусы" items={props.data.filter((item: any) => item.type === 'sauce')}/>
-                <BurgerIngredientGroup title="Начинки" items={props.data.filter((item: any) => item.type === 'main')}/>
+                <BurgerIngredientGroup title="Булки" items={props.data.filter((item) => item.type === 'bun')}/>
+                <BurgerIngredientGroup title="Соусы" items={props.data.filter((item) => item.type === 'sauce')}/>
+                <BurgerIngredientGroup title="Начинки" items={props.data.filter((item) => item.type === 'main')}/>
             </div>
         </section>
     )
@@ -25,7 +25,7 @@ function BurgerIngredients(props: any) {
 
 // PropTypes компонента
 BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(ingredientPropTypes)
+    data: PropTypes.arrayOf(ingredientPropTypes).isRequired
 }
 
 export default BurgerIngredients;

@@ -6,7 +6,7 @@ import styles from './burger-ingredients-item.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 // Компонент карточки ингридиента
-function BurgerIngredientItem(props: any) {
+function BurgerIngredientItem(props) {
     return (
         <div className={`mb-8 ${ styles.container }`}>
             <Counter count={1} size="default" />

@@ -70,60 +70,32 @@ export const dataConstructor = {
         "__v":0
      },
      {
-        "_id":"60666c42cc7b410027a1a9b5",
-        "name":"Говяжий метеорит (отбивная)",
-        "type":"main",
-        "proteins":800,
-        "fat":800,
-        "carbohydrates":300,
-        "calories":2674,
-        "price":3000,
-        "image":"https://code.s3.yandex.net/react/code/meat-04.png",
-        "image_mobile":"https://code.s3.yandex.net/react/code/meat-04-mobile.png",
-        "image_large":"https://code.s3.yandex.net/react/code/meat-04-large.png",
-        "__v":0
-     },
-     {
-        "_id":"60666c42cc7b410027a1a9b5",
-        "name":"Говяжий метеорит (отбивная)",
-        "type":"main",
-        "proteins":800,
-        "fat":800,
-        "carbohydrates":300,
-        "calories":2674,
-        "price":3000,
-        "image":"https://code.s3.yandex.net/react/code/meat-04.png",
-        "image_mobile":"https://code.s3.yandex.net/react/code/meat-04-mobile.png",
-        "image_large":"https://code.s3.yandex.net/react/code/meat-04-large.png",
-        "__v":0
-     },
-     {
-        "_id":"60666c42cc7b410027a1a9b5",
-        "name":"Говяжий метеорит (отбивная)",
-        "type":"main",
-        "proteins":800,
-        "fat":800,
-        "carbohydrates":300,
-        "calories":2674,
-        "price":3000,
-        "image":"https://code.s3.yandex.net/react/code/meat-04.png",
-        "image_mobile":"https://code.s3.yandex.net/react/code/meat-04-mobile.png",
-        "image_large":"https://code.s3.yandex.net/react/code/meat-04-large.png",
-        "__v":0
-     },
-     {
-        "_id":"60666c42cc7b410027a1a9b5",
-        "name":"Говяжий метеорит (отбивная)",
-        "type":"main",
-        "proteins":800,
-        "fat":800,
-        "carbohydrates":300,
-        "calories":2674,
-        "price":3000,
-        "image":"https://code.s3.yandex.net/react/code/meat-04.png",
-        "image_mobile":"https://code.s3.yandex.net/react/code/meat-04-mobile.png",
-        "image_large":"https://code.s3.yandex.net/react/code/meat-04-large.png",
-        "__v":0
-     }
+      "_id":"60666c42cc7b410027a1a9b3",
+      "name":"Филе Люминесцентного тетраодонтимформа",
+      "type":"main",
+      "proteins":44,
+      "fat":26,
+      "carbohydrates":85,
+      "calories":643,
+      "price":988,
+      "image":"https://code.s3.yandex.net/react/code/meat-03.png",
+      "image_mobile":"https://code.s3.yandex.net/react/code/meat-03-mobile.png",
+      "image_large":"https://code.s3.yandex.net/react/code/meat-03-large.png",
+      "__v":0
+   },
+   {
+      "_id":"60666c42cc7b410027a1a9bf",
+      "name":"Сыр с астероидной плесенью",
+      "type":"main",
+      "proteins":84,
+      "fat":48,
+      "carbohydrates":420,
+      "calories":3377,
+      "price":4142,
+      "image":"https://code.s3.yandex.net/react/code/cheese.png",
+      "image_mobile":"https://code.s3.yandex.net/react/code/cheese-mobile.png",
+      "image_large":"https://code.s3.yandex.net/react/code/cheese-large.png",
+      "__v":0
+   }
    ]
    }

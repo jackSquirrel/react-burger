@@ -8,12 +8,12 @@ import { ingredientPropTypes } from '../../propTypes/propTypes';
 import '@ya.praktikum/react-developer-burger-ui-components';
 
 // Компонент группы ингредиентов 
-function BurgerIngredientGroup(props: any) {
+function BurgerIngredientGroup(props) {
     return (
         <div className="mb-2">
             <p className="text text_type_main-medium mb-6">{ props.title }</p>
             <div className={`pl-4 pr-4 ${ styles.container }`}>
-                { props.items.map((item: any) => <BurgerIngredientItem key={item._id} data={item}/>) }
+                { props.items.map((item) => <BurgerIngredientItem key={item._id} data={item}/>) }
             </div>
         </div>
         )
