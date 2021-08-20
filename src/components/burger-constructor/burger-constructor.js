@@ -7,7 +7,7 @@ import { ingredientPropTypes } from '../../propTypes/propTypes';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 // Компонент конструктора бургера
-function BurgerConstructor(props: any) {
+function BurgerConstructor(props) {
     const bun = props.data.bun;
     const main = props.data.main;
     return (
@@ -22,10 +22,10 @@ function BurgerConstructor(props: any) {
                     thumbnail={bun.image}
                 />
                 {/* Основная часть, которую можно изменять (пока что нельзя) */}
-                <div className={`${ styles.constructor__scroll }`}>
-                    { main.map((item: any, index: number) => {
+                <div className={ styles.constructor__scroll }>
+                    { main.map((item) => {
                         return (
-                            <div key={index} className={`mr-2 ${ styles.constructor__item }`}>
+                            <div key={item._id} className={`mr-2 ${ styles.constructor__item }`}>
                                 <DragIcon type="primary" />
                                 <ConstructorElement
                                     text={item.name}
@@ -54,7 +54,7 @@ function BurgerConstructor(props: any) {
 BurgerConstructor.propTypes = {
     data: PropTypes.shape({
         bun: ingredientPropTypes,
-        main: PropTypes.arrayOf(ingredientPropTypes)
+        main: PropTypes.arrayOf(ingredientPropTypes).isRequired
     })
 }
 

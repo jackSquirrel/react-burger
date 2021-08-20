@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 // Компонент с итоговой суммой заказа
-function TotalAmount(props: any) {
+function TotalAmount(props) {
     return (
         <div style={{ display:'flex' }}>
             <div style={{ display:'flex', alignItems:'center' }} className="mr-10">
