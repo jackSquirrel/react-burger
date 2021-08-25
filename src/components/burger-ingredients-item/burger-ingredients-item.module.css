@@ -1,0 +1,14 @@
+.container {
+    width: 272px;
+    height: 208px;
+    position: relative;
+}
+
+.price {
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    text-align: center;
+}
