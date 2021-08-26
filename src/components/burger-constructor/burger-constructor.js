@@ -45,7 +45,7 @@ function BurgerConstructor(props) {
                     thumbnail={bun.image}
                 />
             </div>
-            <TotalAmount total={ 630 }/>
+            <TotalAmount total={ 630 } />
         </section>
     )
 }
@@ -56,6 +56,7 @@ BurgerConstructor.propTypes = {
         bun: ingredientPropTypes,
         main: PropTypes.arrayOf(ingredientPropTypes).isRequired
     })
+    // onOpenClick: PropTypes.func
 }
 
 export default BurgerConstructor;
