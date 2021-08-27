@@ -8,14 +8,10 @@ import withModal from '../hocs/withModal';
 // Компонент с итоговой суммой заказа
 function TotalAmount({ total }) {
     const [modalOpen, setModalOpen] = React.useState(false);
-    const WithModalOrderDetails = withModal({handleModalClose, id: '12345'})(OrderDetails);
+    const WithModalOrderDetails = withModal({ handleModalToggle, id: '12345' })(OrderDetails);
 
-    function handleModalOpen() {
-        setModalOpen(true);
-    }
-
-    function handleModalClose(e) {
-        setModalOpen(false);
+    function handleModalToggle(e) {
+        setModalOpen(!modalOpen);
     }
 
     return (
@@ -25,7 +21,7 @@ function TotalAmount({ total }) {
                     <span className="text text_type_digits-medium mr-2">{ total }</span>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button type="primary" size="large" onClick={ handleModalOpen }>
+                <Button type="primary" size="large" onClick={ handleModalToggle }>
                     Оформить заказ
                 </Button>
             </div>
@@ -34,6 +30,7 @@ function TotalAmount({ total }) {
     )
 }
 
+// Пропсы компонента
 TotalAmount.propTypes = {
     total: PropTypes.number.isRequired
 }

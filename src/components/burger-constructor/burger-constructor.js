@@ -56,7 +56,6 @@ BurgerConstructor.propTypes = {
         bun: ingredientPropTypes,
         main: PropTypes.arrayOf(ingredientPropTypes).isRequired
     })
-    // onOpenClick: PropTypes.func
 }
 
 export default BurgerConstructor;

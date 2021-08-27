@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import '@ya.praktikum/react-developer-burger-ui-components';
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './order-details.module.css';
 
+// Компонент с содержимым модального окна с деталями заказа
 function OrderDetails({ id }) {
     return (
         <div className={ styles.container }>
@@ -16,6 +18,11 @@ function OrderDetails({ id }) {
             <span className="mt-2 mb-30 text text_type_main-default text_color_inactive">Дождитесь готовности на орбитальной станции</span>
         </div>
     )
+}
+
+// Пропсы компонента
+OrderDetails.propTypes = {
+    id: PropTypes.string.isRequired
 }
 
 export default OrderDetails;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
 import styles from './withModal.module.css';
@@ -8,18 +9,24 @@ import ModalOverlay from '../modal-overlay/modal-overlay';
 
 const modalRoot = document.getElementById('modal-root');
 
-const withModal = ({handleModalClose, ...props}) => WrappedComponent => function() {
+// Обертка модального окна
+const withModal = ({ handleModalToggle, ...props }) => WrappedComponent => function() {
     return ReactDOM.createPortal(
-        (<ModalOverlay onClose={ handleModalClose } >
+        (<ModalOverlay onClose={ handleModalToggle } >
             <div className={`pr-10 pl-10 ${styles.modal}`}>
                 <div className={ styles.close }>
-                    <CloseIcon type="primary" onClick={ handleModalClose } />
+                    <CloseIcon type="primary" onClick={ handleModalToggle } />
                 </div>
-                <WrappedComponent {...props}/>
+                <WrappedComponent { ...props } />
             </div>
         </ModalOverlay>),
         modalRoot
     )
+}
+
+// Пропсы компонента
+withModal.propTypes = {
+    handleModalClose: PropTypes.func.isRequired
 }
 
 export default withModal;

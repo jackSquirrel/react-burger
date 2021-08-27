@@ -5,26 +5,18 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 
-// Так будут в сторе хранится выбранные ингридиенты (но, это не точно)
+// Захардкоженные данные для BurgerConstrunctor, пока нет данных о выбранных 
+// пользователем ингредиентов
 import { dataConstructor } from '../../utils/data-constructor';
+
 // Временно пока пока нет API
 // import { dataIngredients } from '../../utils/data-ingredients';
 
+// Url API
 const apiUrl = 'https://norma.nomoreparties.space';
 
 function App() {
     const [ingredients, setIngredients] = React.useState([]);
-    // const [modalOpen, setModalOpen] = React.useState(false);
-
-    // Возможно, стоит заменить на одну функцию. Но это не точно...
-
-    // function handleModalClose() {
-    //     this.setModalOpen(false);
-    // }
-
-    // function handleModalOpen() {
-    //     this.setModalOpen(true);
-    // }
 
     React.useEffect(() => {
         fetch(`${apiUrl}/api/ingredients`)

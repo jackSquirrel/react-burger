@@ -2,11 +2,12 @@ import React from 'react';
 
 import styles from './ingredient-details.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components';
+import { ingredientPropTypes } from '../../propTypes/propTypes';
 
+// Компонент с содержимым о деталях ингридиента
 function IngredientDetails(props) {
     return (
         <div>
-            {/* Вынести заголовок ???? */}
             <span className={`text text_type_main-large mt-10 ${ styles.title }`}>Детали ингредиента</span>
             <div className={`mb-15 ${ styles.container }`}>
                 <img src={ props.image_large } alt={ props.name } />
@@ -32,6 +33,11 @@ function IngredientDetails(props) {
             </div>
         </div>
     )
+}
+
+// Пропсы компонента
+IngredientDetails.propTypes = {
+    ...ingredientPropTypes.isRequired
 }
 
 export default IngredientDetails;
