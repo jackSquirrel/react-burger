@@ -19,16 +19,18 @@ function TotalAmount({ total }) {
     }
 
     return (
-        <div style={{ display:'flex' }}>
-            <div style={{ display:'flex', alignItems:'center' }} className="mr-10">
-                <span className="text text_type_digits-medium mr-2">{ total }</span>
-                <CurrencyIcon type="primary" />
+        <>
+            <div style={{ display:'flex' }}>
+                <div style={{ display:'flex', alignItems:'center' }} className="mr-10">
+                    <span className="text text_type_digits-medium mr-2">{ total }</span>
+                    <CurrencyIcon type="primary" />
+                </div>
+                <Button type="primary" size="large" onClick={ handleModalOpen }>
+                    Оформить заказ
+                </Button>
             </div>
-            <Button type="primary" size="large" onClick={ handleModalOpen }>
-                Оформить заказ
-            </Button>
             { modalOpen && <WithModalOrderDetails />}
-        </div>
+        </>
     )
 }
 
