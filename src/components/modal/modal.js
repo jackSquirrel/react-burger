@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
-import styles from './withModal.module.css';
+import styles from './modal.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../modal-overlay/modal-overlay';
@@ -10,14 +10,14 @@ import ModalOverlay from '../modal-overlay/modal-overlay';
 const modalRoot = document.getElementById('modal-root');
 
 // Обертка модального окна
-const withModal = ({ handleModalToggle, ...props }) => WrappedComponent => function() {
+function Modal ({ children, onClose }) {
     return ReactDOM.createPortal(
-        (<ModalOverlay onClose={ handleModalToggle } >
+        (<ModalOverlay onClose={ onClose } >
             <div className={`pr-10 pl-10 ${styles.modal}`}>
                 <div className={ styles.close }>
-                    <CloseIcon type="primary" onClick={ handleModalToggle } />
+                    <CloseIcon type="primary" onClick={ onClose } />
                 </div>
-                <WrappedComponent { ...props } />
+                { children }
             </div>
         </ModalOverlay>),
         modalRoot
@@ -25,8 +25,9 @@ const withModal = ({ handleModalToggle, ...props }) => WrappedComponent => funct
 }
 
 // Пропсы компонента
-withModal.propTypes = {
-    handleModalClose: PropTypes.func.isRequired
+Modal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    children: PropTypes.element.isRequired
 }
 
-export default withModal;
+export default Modal;

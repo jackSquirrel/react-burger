@@ -1,24 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { ingredientPropTypes } from '../../propTypes/propTypes';
 import styles from './burger-ingredients-item.module.css';
-import withModal from '../hocs/withModal';
-import IngredientDetails from '../ingredient-details/ingredient-details';
 
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 // Компонент карточки ингридиента
-function BurgerIngredientItem({ data }) {
-    const [modalOpen, setModalOpen] = React.useState(false);
-    const WithModalIngredientDetails = withModal({ handleModalToggle, ...data })(IngredientDetails);
-
-    function handleModalToggle() {
-        setModalOpen(!modalOpen);
-    }
-
+function BurgerIngredientItem({ onOpen, data }) {
     return (
         <>
-            <div className={`mb-8 ${ styles.container }`} onClick={ handleModalToggle }>
+            <div className={`mb-8 ${ styles.container }`} onClick={ () => onOpen(data) }>
                 <Counter count={1} size="default" />
                 <img alt={ data.name } src={ data.image } className="ml-4 mr-4" />
                 <div className={`mt-2 mb-2 ${ styles.price }`}>
@@ -27,14 +19,14 @@ function BurgerIngredientItem({ data }) {
                 </div>
                 <p className={`text text_type_main-default ${ styles.title }`}>{ data.name }</p>
             </div>
-            { modalOpen && <WithModalIngredientDetails /> }
         </>
     )
 }
 
 // PropTypes компонента
 BurgerIngredientItem.protTypes = {
-    data: ingredientPropTypes.isRequired
+    data: ingredientPropTypes.isRequired,
+    onOpen: PropTypes.func.isRequired
 }
 
 export default BurgerIngredientItem;

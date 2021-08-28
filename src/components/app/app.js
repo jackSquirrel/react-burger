@@ -21,7 +21,10 @@ function App() {
     React.useEffect(() => {
         fetch(`${apiUrl}/api/ingredients`)
             .then((res) => {
-                return res.json();
+                if (res.ok) {
+                    return res.json();
+                }
+                return Promise.reject(`Ошибка ${res.status}`);
             })
             .then((data) => {
                 setIngredients(data.data);
