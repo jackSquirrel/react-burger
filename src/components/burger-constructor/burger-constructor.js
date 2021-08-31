@@ -45,7 +45,7 @@ function BurgerConstructor(props) {
                     thumbnail={bun.image}
                 />
             </div>
-            <TotalAmount total={ 630 }/>
+            <TotalAmount total={ 630 } />
         </section>
     )
 }

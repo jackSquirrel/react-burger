@@ -5,18 +5,41 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 
-// Так будут в сторе хранится выбранные ингридиенты (но, это не точно)
+// Захардкоженные данные для BurgerConstrunctor, пока нет данных о выбранных 
+// пользователем ингредиентов
 import { dataConstructor } from '../../utils/data-constructor';
+
 // Временно пока пока нет API
-import { dataIngredients } from '../../utils/data-ingredients';
+// import { dataIngredients } from '../../utils/data-ingredients';
+
+// Url API
+const apiUrl = 'https://norma.nomoreparties.space';
 
 function App() {
+    const [ingredients, setIngredients] = React.useState([]);
+
+    React.useEffect(() => {
+        fetch(`${apiUrl}/api/ingredients`)
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return Promise.reject(`Ошибка ${res.status}`);
+            })
+            .then((data) => {
+                setIngredients(data.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [])
+
     return (
         <div className={ styles.app }>
             <AppHeader />
             <main style={{ display:'flex', gap:40 }}>
-                <BurgerIngredients data={dataIngredients}/>
-                <BurgerConstructor data={dataConstructor}/>
+                <BurgerIngredients data={ ingredients } />
+                <BurgerConstructor data={ dataConstructor } />
             </main>
         </div>
     );
