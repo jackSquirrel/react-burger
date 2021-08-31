@@ -22,7 +22,7 @@ function OrderDetails({ id }) {
 
 // Пропсы компонента
 OrderDetails.propTypes = {
-    id: PropTypes.string.isRequired
+    id: PropTypes.number.isRequired
 }
 
 export default OrderDetails;
