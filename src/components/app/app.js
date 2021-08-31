@@ -4,10 +4,11 @@ import styles from './app.module.css';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
+import { BurgerConstructorContext } from '../../services/constructorContext';
 
 // Захардкоженные данные для BurgerConstrunctor, пока нет данных о выбранных 
 // пользователем ингредиентов
-import { dataConstructor } from '../../utils/data-constructor';
+// import { dataConstructor } from '../../utils/data-constructor';
 
 // Временно пока пока нет API
 // import { dataIngredients } from '../../utils/data-ingredients';
@@ -39,7 +40,9 @@ function App() {
             <AppHeader />
             <main style={{ display:'flex', gap:40 }}>
                 <BurgerIngredients data={ ingredients } />
-                <BurgerConstructor data={ dataConstructor } />
+                <BurgerConstructorContext.Provider value={ ingredients }>
+                    <BurgerConstructor />
+                </BurgerConstructorContext.Provider>
             </main>
         </div>
     );
