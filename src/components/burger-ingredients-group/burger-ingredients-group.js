@@ -5,6 +5,7 @@ import BurgerIngredientItem from '../burger-ingredients-item/burger-ingredients-
 import styles from './burger-ingredients-group.module.css';
 import { ingredientPropTypes } from '../../propTypes/propTypes';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import Modal from '../modal/modal';
 
 import '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -36,7 +37,7 @@ function BurgerIngredientGroup(props) {
                     }
                 </div>
             </div>
-            { modalOpen && <IngredientDetails {...modalData} onClose={ handleModalClose }/> }
+            { modalOpen && <Modal onClose={ handleModalClose }><IngredientDetails {...modalData} /></Modal> } 
         </>
         )
     }
