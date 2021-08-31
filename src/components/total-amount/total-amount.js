@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from '../order-details/order-details';
+import Modal from '../modal/modal';
 
 // Компонент с итоговой суммой заказа
 function TotalAmount({ total }) {
@@ -23,7 +24,7 @@ function TotalAmount({ total }) {
                     Оформить заказ
                 </Button>
             </div>
-            { modalOpen && <OrderDetails onClose={ handleModalToggle } id={ '12345' } />}
+            { modalOpen && <Modal onClose={ handleModalToggle }><OrderDetails id={ '12345' } /></Modal>}
         </>
     )
 }
