@@ -1,45 +1,32 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
-import { BurgerConstructorContext } from '../../services/constructorContext';
+import { getOrder } from '../../services/actions/order';
+import { CLOSE_MODAL } from '../../services/actions/modal';
 
 // Компонент с итоговой суммой заказа
-function TotalAmount({ total }) {
-    const [modalOpen, setModalOpen] = React.useState(false);
-    const [orderNumber, setOrderNumber] = React.useState(null);
-    const ingredients = React.useContext(BurgerConstructorContext).map((item) => item._id)
+function TotalAmount() {
 
-    // Открытие модального окна. Получение номера заказа от API
+    const dispatch = useDispatch();
+
+    const isOrderModalOpen = useSelector(store => store.modal.isOrderModalOpen)
+    const { total, ingredients } = useSelector(store => ({
+        total: store.constructorIngredients.total,
+        ingredients: [...store.constructorIngredients.mainIngredients, 
+                        store.constructorIngredients.bun].map(item => item._id)
+    }))
+
+    // Открытие модального окна c номером заказа от API
     function handleModalOpen() {
-        fetch(`https://norma.nomoreparties.space/api/orders`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "ingredients": ingredients
-            })
-        })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
-        .then((data) => {
-            setOrderNumber(data.order.number);
-            setModalOpen(true);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+        dispatch(getOrder(ingredients));
     }
 
+    // Закрытие модального окна
     function handleModalClose() {
-        setModalOpen(false);
+        dispatch({ type: CLOSE_MODAL });
     }
 
     return (
@@ -53,17 +40,12 @@ function TotalAmount({ total }) {
                     Оформить заказ
                 </Button>
             </div>
-            { modalOpen && 
+            { isOrderModalOpen && 
             <Modal onClose={ handleModalClose }>
-                <OrderDetails id={ orderNumber } />
+                <OrderDetails />
             </Modal> }
         </>
     )
-}
-
-// Пропсы компонента
-TotalAmount.propTypes = {
-    total: PropTypes.number.isRequired
 }
 
 export default TotalAmount;

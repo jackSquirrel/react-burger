@@ -2,7 +2,8 @@ import { ADD_INGREDIENT, DELETE_INGREDIENT } from '../actions/constructorIngredi
 
 const initialState = {
     mainIngredients: [],
-    bun: {}
+    bun: {},
+    total: 0
 }
 
 export function constructorIngredientsReducer(state = initialState, action) {

@@ -1,4 +1,5 @@
 import { apiUrl } from '../api';
+import { OPEN_ORDER_MODAL } from './modal';
 
 export const GET_ORDER = 'GET_ORDER';
 
@@ -10,7 +11,7 @@ export function getOrder(ingredients) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "ingredients": ingredients
+                "ingredients": ["60d3b41abdacab0026a733c6"]
             })
         })
             .then(res => {
@@ -23,6 +24,9 @@ export function getOrder(ingredients) {
                 dispatch({
                     type: GET_ORDER,
                     order: data.order.number
+                })
+                dispatch({
+                    type: OPEN_ORDER_MODAL
                 })
             })
             .catch(err => {

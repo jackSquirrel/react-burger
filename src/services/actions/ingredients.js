@@ -23,8 +23,9 @@ export function getIngredients() {
                         type: GET_INGREDIENTS_SUCCESS,
                         items: data.data
                     })
+                } else {
+                    return Promise.reject(`Ошибка ${data.success}`)
                 }
-                return Promise.reject(`Ошибка ${data.success}`)
             })
             .catch(err => {
                 console.log(err);

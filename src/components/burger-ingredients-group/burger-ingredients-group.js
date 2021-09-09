@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import BurgerIngredientItem from '../burger-ingredients-item/burger-ingredients-item';
@@ -6,22 +7,27 @@ import styles from './burger-ingredients-group.module.css';
 import { ingredientPropTypes } from '../../propTypes/propTypes';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
+import { ADD_INGREDIENT_DETAILS, DELETE_INGREDIENT_DETAILS } from '../../services/actions/ingredientDetails';
+import { CLOSE_MODAL, OPEN_DETAILS_MODAL } from '../../services/actions/modal';
 
 import '@ya.praktikum/react-developer-burger-ui-components';
 
 // Компонент группы ингредиентов 
 function BurgerIngredientGroup(props) {
-    const [modalOpen, setModalOpen] = React.useState(false);
-    const [modalData, setModalData] = React.useState({});
+    const isDetailsModalOpen = useSelector(store => store.modal.isDetailsModalOpen);
+    const dispatch = useDispatch();
 
     function handleModalClose() {
-        setModalOpen(false);
-        setModalData({});
+        dispatch({ type: CLOSE_MODAL });
+        dispatch({ type: DELETE_INGREDIENT_DETAILS });
     }
 
     function handleModalOpen(data) {
-        setModalOpen(true);
-        setModalData(data);
+        dispatch({
+            type: ADD_INGREDIENT_DETAILS,
+            item: data
+        });
+        dispatch({ type: OPEN_DETAILS_MODAL });
     }
 
     return (
@@ -37,7 +43,7 @@ function BurgerIngredientGroup(props) {
                     }
                 </div>
             </div>
-            { modalOpen && <Modal onClose={ handleModalClose }><IngredientDetails {...modalData} /></Modal> } 
+            { isDetailsModalOpen && <Modal onClose={ handleModalClose }><IngredientDetails /></Modal> } 
         </>
         )
     }
