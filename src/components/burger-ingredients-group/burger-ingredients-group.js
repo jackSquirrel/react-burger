@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -14,6 +14,7 @@ import '@ya.praktikum/react-developer-burger-ui-components';
 
 // Компонент группы ингредиентов 
 function BurgerIngredientGroup(props) {
+
     const isDetailsModalOpen = useSelector(store => store.modal.isDetailsModalOpen);
     const dispatch = useDispatch();
 
@@ -33,7 +34,12 @@ function BurgerIngredientGroup(props) {
     return (
         <>
             <div className="mb-2">
-                <p className="text text_type_main-medium mb-6">{ props.title }</p>
+                <p 
+                    id={ props.title === 'Соусы' ? 'sauces' : props.title === 'Булки' ? 'buns' : 'main'} 
+                    className="text text_type_main-medium mb-6"
+                >
+                        { props.title }
+                </p>
                 <div className={`pl-4 pr-4 ${ styles.container }`}>
                     { props.items.map((item) => <BurgerIngredientItem 
                                                     onOpen={ handleModalOpen } 

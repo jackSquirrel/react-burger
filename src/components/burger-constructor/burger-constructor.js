@@ -26,7 +26,7 @@ function BurgerConstructor() {
 
     return (
         <section className={`pr-4 ${ styles.section }`}>
-            {ingredients.length ? 
+
             <div className={`mt-25 mb-10 ml-4 ${ styles.constructor__container }`}>
                 {/* Открывающая булочка */}
                 { bun && <ConstructorElement
@@ -62,7 +62,7 @@ function BurgerConstructor() {
                     thumbnail={bun.image}
                 /> }
             </div>
-            : null }
+
             <TotalAmount total={ getTotalAmount(bun, main) } />
         </section>
     )
