@@ -8,7 +8,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import { DECREASE_COUNTER } from '../../services/actions/ingredients';
 
 function BurgerConstructorItem ({ item, index }) {
-    const { _id, name, price, image } = item;
+    const { _id, name, price, image, uniqueId } = item;
 
     const ref = useRef(null);
     const dispatch = useDispatch();
@@ -46,7 +46,7 @@ function BurgerConstructorItem ({ item, index }) {
     const [ {isDragging} , drag ] = useDrag({
         type: 'internalIngredients',
         item: () => {
-            return { id: _id, index }
+            return { id: uniqueId, index }
         },
         collect: (monitor) => ({
             isDragging: monitor.isDragging()
@@ -57,8 +57,8 @@ function BurgerConstructorItem ({ item, index }) {
     drag(drop(ref));
 
     // Удаление ингредиента
-    function onCloseHandler(id) {
-        dispatch({ type: DELETE_FROM_CONSTRUCTOR, id });
+    function onCloseHandler(uniqueId, id) {
+        dispatch({ type: DELETE_FROM_CONSTRUCTOR, id: uniqueId, price });
         dispatch({ type: DECREASE_COUNTER, id })
     }
 
@@ -69,7 +69,7 @@ function BurgerConstructorItem ({ item, index }) {
                 text={name}
                 price={price}
                 thumbnail={image}
-                handleClose={ () => onCloseHandler(_id) }
+                handleClose={ () => onCloseHandler(uniqueId, _id) }
             />
         </div>
     )

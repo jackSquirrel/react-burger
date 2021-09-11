@@ -9,19 +9,30 @@ const initialState = {
 export function constructorIngredientsReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_TO_CONSTRUCTOR:
+            if (action.item.type === 'bun') {
+                if (Object.keys(state.bun).length) {
+                    return {
+                        ...state,
+                        bun: action.item,
+                        total: state.total - state.bun.price*2 + action.item.price*2
+                    }
+                }
+                return {
+                    ...state,
+                    bun: action.item,
+                    total: state.total + action.item.price*2
+                }
+            }
             return {
-                bun: action.item.type === 'bun' ? action.item : state.bun,
-                mainIngredients: action.item.type === 'bun' ? [...state.mainIngredients] : [
-                    ...state.mainIngredients,
-                    action.item
-                ],
-                total: action.item.type === 'bun' ? state.total + action.item.price * 2 : state.total + action.item.price
+                ...state,
+                mainIngredients: [ ...state.mainIngredients, action.item ],
+                total: state.total + action.item.price
             }
         case DELETE_FROM_CONSTRUCTOR:
             return {
                 ...state, 
-                // total: state.total - 
-                mainIngredients: state.mainIngredients.filter(item => item._id !== action.id),
+                total: state.total - action.price,
+                mainIngredients: state.mainIngredients.filter(item => item.uniqueId !== action.id),
             }
         case SET_SORTED_INGREDIENTS:
             const dragIngredient = state.mainIngredients[action.dragId];

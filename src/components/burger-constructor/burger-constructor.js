@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import uuid from 'react-uuid';
 // import PropTypes from 'prop-types';
 
 import styles from './burger-constructor.module.css';
@@ -8,7 +9,7 @@ import TotalAmount from '../total-amount/total-amount';
 import { useDrop } from "react-dnd";
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ADD_TO_CONSTRUCTOR } from '../../services/actions/constructorIngredients';
-import { INCREASE_COUNTER } from '../../services/actions/ingredients';
+import { DECREASE_COUNTER, INCREASE_COUNTER } from '../../services/actions/ingredients';
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 
 // Компонент конструктора бургера
@@ -23,11 +24,20 @@ function BurgerConstructor() {
     const [, drop] = useDrop({
         accept: 'ingredient',
         drop(item) {
-            onDropHandler(item.data);
+            const newItem = item.data;
+            if (bun._id === newItem._id) {
+                return;
+            }
+            newItem.uniqueId = uuid();
+            onDropHandler(newItem);
         },
     });
 
     function onDropHandler(item) {
+        if (item.type === 'bun' && Object.keys(bun).length) {
+            console.log('here');
+            dispatch({ type: DECREASE_COUNTER, id: bun._id })
+        }
         dispatch({ type: ADD_TO_CONSTRUCTOR, item });
         dispatch({ type: INCREASE_COUNTER, id: item._id });
     }
@@ -48,7 +58,7 @@ function BurgerConstructor() {
                 {/* Основная часть, которую можно изменять (пока что нельзя) */}
                 <div className={ styles.constructor__scroll }>
                     { main.map((item, index) => <BurgerConstructorItem 
-                                            key={item._id} 
+                                            key={item.uniqueId} 
                                             item={item}
                                             index={index}
                                         />)}
