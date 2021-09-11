@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDrag } from "react-dnd";
 
 import { ingredientPropTypes } from '../../propTypes/propTypes';
 import styles from './burger-ingredients-item.module.css';
@@ -8,9 +9,14 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 
 // Компонент карточки ингридиента
 function BurgerIngredientItem({ onOpen, data }) {
+    const [, dragRef] = useDrag({
+        type: 'ingredient',
+        item: {data}
+    });
+
     return (
         <>
-            <div className={`mb-8 ${ styles.container }`} onClick={ () => onOpen(data) }>
+            <div ref={ dragRef } className={`mb-8 ${ styles.container }`} onClick={ () => onOpen(data) }>
                 <Counter count={1} size="default" />
                 <img alt={ data.name } src={ data.image } className="ml-4 mr-4" />
                 <div className={`mt-2 mb-2 ${ styles.price }`}>

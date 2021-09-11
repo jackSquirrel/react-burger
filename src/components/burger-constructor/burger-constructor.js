@@ -1,43 +1,52 @@
 import React from 'react';
-// import PropTypes from 'prop-types';s
+import { useDispatch, useSelector } from 'react-redux';
+// import PropTypes from 'prop-types';
 
 import styles from './burger-constructor.module.css';
 import TotalAmount from '../total-amount/total-amount';
-// import { ingredientPropTypes } from '../../propTypes/propTypes';
+
+import { useDrop } from "react-dnd";
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { BurgerConstructorContext } from '../../services/constructorContext';
+import { ADD_TO_CONSTRUCTOR, DELETE_FROM_CONSTRUCTOR } from '../../services/actions/constructorIngredients';
 
 // Компонент конструктора бургера
 function BurgerConstructor() {
-    const ingredients = React.useContext(BurgerConstructorContext);
+    const dispatch = useDispatch();
+    const { total, bun, main } = useSelector(store => ({
+        total: store.constructorIngredients.total,
+        bun: store.constructorIngredients.bun,
+        main: store.constructorIngredients.mainIngredients
+    }))
 
-    const bun = ingredients.length ? ingredients.find((item) => item.type === 'bun') : null;
-    const main = ingredients.length ? ingredients.filter((item) => item.type !== 'bun') : [];
+    const [, dropTarget] = useDrop({
+        accept: 'ingredient',
+        drop(item) {
+            onDropHandler(item.data);
+        },
+    });
 
-    // Подсчет итоговой стоимости 
-    function getTotalAmount(bun, main) {
-        let summ = 0;
-        if (bun) {
-            summ += bun.price * 2;
-        }
-        main.forEach(item => summ += item.price)
-        return summ;
+    function onDropHandler(item) {
+        console.log('DROP!');
+        dispatch({ type: ADD_TO_CONSTRUCTOR, item });
+    }
+
+    function onCloseHandler(id) {
+        dispatch({ type: DELETE_FROM_CONSTRUCTOR, id })
     }
 
     return (
         <section className={`pr-4 ${ styles.section }`}>
 
-            <div className={`mt-25 mb-10 ml-4 ${ styles.constructor__container }`}>
+            <div ref={dropTarget} className={`mt-25 mb-10 ml-4 ${ styles.constructor__container }`}>
                 {/* Открывающая булочка */}
-                { bun && <ConstructorElement
+                { Object.keys(bun).length ? <ConstructorElement
                     type="top"
                     isLocked={true}
                     text={`${bun.name} (верх)`}
                     price={bun.price}
                     thumbnail={bun.image}
-                /> }
+                /> : null }
                 {/* Основная часть, которую можно изменять (пока что нельзя) */}
-                { main.length ? 
                 <div className={ styles.constructor__scroll }>
                     { main.map((item) => {
                         return (
@@ -47,33 +56,25 @@ function BurgerConstructor() {
                                     text={item.name}
                                     price={item.price}
                                     thumbnail={item.image}
+                                    handleClose={ () => onCloseHandler(item._id) }
                                 />
                             </div>
                         )
                     }) }
                 </div>
-                : null }
                 {/* Закрывающая булочка */}
-                { bun && <ConstructorElement
+                { Object.keys(bun).length ? <ConstructorElement
                     type="bottom"
                     isLocked={true}
                     text={`${bun.name} (низ)`}
                     price={bun.price}
                     thumbnail={bun.image}
-                /> }
+                /> : null }
             </div>
 
-            <TotalAmount total={ getTotalAmount(bun, main) } />
+            <TotalAmount total={ total } />
         </section>
     )
 }
-
-// PropTypes компонента
-// BurgerConstructor.propTypes = {
-//     data: PropTypes.shape({
-//         bun: ingredientPropTypes,
-//         main: PropTypes.arrayOf(ingredientPropTypes).isRequired
-//     })
-// }
 
 export default BurgerConstructor;

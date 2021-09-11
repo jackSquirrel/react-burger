@@ -1,13 +1,15 @@
 import {
     GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_SUCCESS,
-    GET_INGREDIENTS_FAILED
+    GET_INGREDIENTS_FAILED,
+    SET_ACTIVE_TAB
 } from '../actions/ingredients';
 
 const initialState = {
     items: [],
     itemsFaild: false,
-    itemsRequest: false
+    itemsRequest: false,
+    activeTab: 'buns'
 };
 
 export const ingredientsReducer = (state = initialState, action) => {
@@ -22,6 +24,10 @@ export const ingredientsReducer = (state = initialState, action) => {
         case GET_INGREDIENTS_FAILED:
             return {
                 ...state, itemsRequest: false, itemsFaild: true
+            }
+        case SET_ACTIVE_TAB:
+            return {
+                ...state, activeTab: action.tab
             }
         default:
             return state;

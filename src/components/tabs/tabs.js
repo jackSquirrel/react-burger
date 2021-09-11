@@ -1,19 +1,28 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './tabs.module.css';
+import { SET_ACTIVE_TAB } from '../../services/actions/ingredients';
 
 function Tabs() {
-    const [current, setCurrent] = React.useState('one')
+    const { current } = useSelector(store => ({ current: store.ingredients.activeTab }));
+    const dispatch = useDispatch();
+
+    function setCurrent(tab) {
+      dispatch({ type: SET_ACTIVE_TAB, tab });
+    }
+
     return (
         <div style={{ display: 'flex' }}>
-          <a class={ styles.link } href="#buns"><Tab value="one" active={current === 'one'} onClick={setCurrent}>
+          <a className={ styles.link } href="#buns"><Tab value="buns" active={current === 'buns'} onClick={() => setCurrent('buns')}>
             Булки
           </Tab></a>
-          <a class={ styles.link } href="#sauces"><Tab value="two" active={current === 'two'} onClick={setCurrent}>
+          <a className={ styles.link } href="#sauces"><Tab value="sauces" active={current === 'sauces'} onClick={() => setCurrent('sauces')}>
             Соусы
           </Tab></a>
-          <a class={ styles.link } href="#main"><Tab value="three" active={current === 'three'} onClick={setCurrent}>
+          <a className={ styles.link } href="#main"><Tab value="main" active={current === 'main'} onClick={() => setCurrent('main')}>
             Начинки
           </Tab></a>
         </div>

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -13,7 +13,7 @@ import { CLOSE_MODAL, OPEN_DETAILS_MODAL } from '../../services/actions/modal';
 import '@ya.praktikum/react-developer-burger-ui-components';
 
 // Компонент группы ингредиентов 
-function BurgerIngredientGroup(props) {
+const BurgerIngredientGroup = React.forwardRef((props, ref) => {
 
     const isDetailsModalOpen = useSelector(store => store.modal.isDetailsModalOpen);
     const dispatch = useDispatch();
@@ -33,7 +33,7 @@ function BurgerIngredientGroup(props) {
 
     return (
         <>
-            <div className="mb-2">
+            <div className="mb-2" ref={ref}>
                 <p 
                     id={ props.title === 'Соусы' ? 'sauces' : props.title === 'Булки' ? 'buns' : 'main'} 
                     className="text text_type_main-medium mb-6"
@@ -53,7 +53,7 @@ function BurgerIngredientGroup(props) {
         </>
         )
     }
-
+)
 // PropTypes для компонента 
 BurgerIngredientGroup.propTypes = {
     title: PropTypes.string.isRequired,
