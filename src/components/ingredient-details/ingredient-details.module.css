@@ -20,3 +20,8 @@
     flex-direction: column;
     align-items: center;
 }
+
+.image {
+    width: 480px;
+    height: 240px;
+}

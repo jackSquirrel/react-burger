@@ -7,18 +7,28 @@
 }
 
 .constructor__container {
+    width: 600px;
+    height: 656px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 16px;
 }
 
-.constructor__scroll {
+.constructor__main {
     height: 464px;
     margin-right: -16px;
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+.constructor__scroll {
+    /* height: 464px;
+    margin-right: -16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; */
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -30,11 +40,4 @@
 
 .constructor__scroll::-webkit-scrollbar-thumb {
     background-color: #8585ad;
-}
-
-.constructor__item {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }

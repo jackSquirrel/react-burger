@@ -1,45 +1,29 @@
-import React from 'react';
-import styles from './app.module.css';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
+import styles from './app.module.css';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-
-// Захардкоженные данные для BurgerConstrunctor, пока нет данных о выбранных 
-// пользователем ингредиентов
-import { dataConstructor } from '../../utils/data-constructor';
-
-// Временно пока пока нет API
-// import { dataIngredients } from '../../utils/data-ingredients';
-
-// Url API
-const apiUrl = 'https://norma.nomoreparties.space';
+import { getIngredients } from '../../services/actions/ingredients';
 
 function App() {
-    const [ingredients, setIngredients] = React.useState([]);
+    const dispatch = useDispatch();
 
-    React.useEffect(() => {
-        fetch(`${apiUrl}/api/ingredients`)
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка ${res.status}`);
-            })
-            .then((data) => {
-                setIngredients(data.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }, [])
+    useEffect(() => {
+        dispatch(getIngredients());
+    }, [dispatch])
 
     return (
         <div className={ styles.app }>
             <AppHeader />
             <main style={{ display:'flex', gap:40 }}>
-                <BurgerIngredients data={ ingredients } />
-                <BurgerConstructor data={ dataConstructor } />
+                <DndProvider backend={HTML5Backend}>
+                    <BurgerIngredients />
+                    <BurgerConstructor />
+                </DndProvider>
             </main>
         </div>
     );

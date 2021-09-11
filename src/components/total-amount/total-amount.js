@@ -1,15 +1,31 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from '../order-details/order-details';
+import Modal from '../modal/modal';
+import { getOrder } from '../../services/actions/order';
+import { CLOSE_MODAL } from '../../services/actions/modal';
+import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-// Компонент с итоговой суммой заказа
-function TotalAmount({ total }) {
-    const [modalOpen, setModalOpen] = React.useState(false);
+// КОМПОНЕНТ С ИТОГОВОЙ СУММОЙ ЗАКАЗА
+function TotalAmount() {
+    const dispatch = useDispatch();
 
-    function handleModalToggle(e) {
-        setModalOpen(!modalOpen);
+    const isOrderModalOpen = useSelector(store => store.modal.isOrderModalOpen)
+    const { total, ingredients } = useSelector(store => ({
+        total: store.constructorIngredients.total,
+        ingredients: [...store.constructorIngredients.mainIngredients, 
+                        store.constructorIngredients.bun].map(item => item._id)
+    }))
+
+    // Открытие модального окна c номером заказа от API
+    function handleModalOpen() {
+        dispatch(getOrder(ingredients));
+    }
+
+    // Закрытие модального окна
+    function handleModalClose() {
+        dispatch({ type: CLOSE_MODAL });
     }
 
     return (
@@ -19,18 +35,16 @@ function TotalAmount({ total }) {
                     <span className="text text_type_digits-medium mr-2">{ total }</span>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button type="primary" size="large" onClick={ handleModalToggle }>
+                <Button type="primary" size="large" onClick={ handleModalOpen }>
                     Оформить заказ
                 </Button>
             </div>
-            { modalOpen && <OrderDetails onClose={ handleModalToggle } id={ '12345' } />}
+            { isOrderModalOpen && 
+            <Modal onClose={ handleModalClose }>
+                <OrderDetails />
+            </Modal> }
         </>
     )
-}
-
-// Пропсы компонента
-TotalAmount.propTypes = {
-    total: PropTypes.number.isRequired
 }
 
 export default TotalAmount;
