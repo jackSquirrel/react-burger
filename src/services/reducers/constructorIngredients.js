@@ -15,7 +15,7 @@ export function constructorIngredientsReducer(state = initialState, action) {
                     ...state.mainIngredients,
                     action.item
                 ],
-                total: action.item.type === 'bun' ? state.total + action.item.price * 3 : state.total + action.item.price
+                total: action.item.type === 'bun' ? state.total + action.item.price * 2 : state.total + action.item.price
             }
         case DELETE_FROM_CONSTRUCTOR:
             return {

@@ -11,13 +11,13 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 function BurgerIngredientItem({ onOpen, data }) {
     const [, dragRef] = useDrag({
         type: 'ingredient',
-        item: {data}
+        item: { data }
     });
 
     return (
         <>
             <div ref={ dragRef } className={`mb-8 ${ styles.container }`} onClick={ () => onOpen(data) }>
-                <Counter count={1} size="default" />
+                { data.counter ? <Counter count={1} size="default" /> : null }
                 <img alt={ data.name } src={ data.image } className="ml-4 mr-4" />
                 <div className={`mt-2 mb-2 ${ styles.price }`}>
                     <p className="text text_type_digits-default mr-2">{ data.price }</p>

@@ -8,6 +8,7 @@ import TotalAmount from '../total-amount/total-amount';
 import { useDrop } from "react-dnd";
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ADD_TO_CONSTRUCTOR, DELETE_FROM_CONSTRUCTOR } from '../../services/actions/constructorIngredients';
+import { INCREASE_COUNTER } from '../../services/actions/ingredients';
 
 // Компонент конструктора бургера
 function BurgerConstructor() {
@@ -26,8 +27,8 @@ function BurgerConstructor() {
     });
 
     function onDropHandler(item) {
-        console.log('DROP!');
         dispatch({ type: ADD_TO_CONSTRUCTOR, item });
+        dispatch({ type: INCREASE_COUNTER, id: item._id });
     }
 
     function onCloseHandler(id) {
