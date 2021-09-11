@@ -3,7 +3,8 @@ import {
     GET_INGREDIENTS_SUCCESS,
     GET_INGREDIENTS_FAILED,
     SET_ACTIVE_TAB,
-    INCREASE_COUNTER
+    INCREASE_COUNTER,
+    DECREASE_COUNTER
 } from '../actions/ingredients';
 
 const initialState = {
@@ -32,16 +33,17 @@ export const ingredientsReducer = (state = initialState, action) => {
             }
         case INCREASE_COUNTER:
             return {
-                ...state, items: state.items.map((item) => {
-                    if (item._id === action.id) {
-                        return {
-                            ...item,
-                            counter: item.counter + 1
-                        }
-                    } else {
-                        return item
-                    }
-                })
+                ...state, 
+                items: state.items.map((item) => item._id === action.id ? 
+                                                { ...item, counter: item.counter + 1 }
+                                                : item)
+            }
+        case DECREASE_COUNTER:
+            return {
+                ...state, 
+                items: state.items.map((item) => item._id === action.id ? 
+                                                { ...item, counter: item.counter - 1 }
+                                                : item)
             }
         default:
             return state;

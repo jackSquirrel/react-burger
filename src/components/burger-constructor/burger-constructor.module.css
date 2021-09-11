@@ -33,10 +33,3 @@
 .constructor__scroll::-webkit-scrollbar-thumb {
     background-color: #8585ad;
 }
-
-.constructor__item {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}

@@ -1,4 +1,4 @@
-import { ADD_TO_CONSTRUCTOR, DELETE_FROM_CONSTRUCTOR } from '../actions/constructorIngredients';
+import { ADD_TO_CONSTRUCTOR, DELETE_FROM_CONSTRUCTOR, SET_SORTED_INGREDIENTS } from '../actions/constructorIngredients';
 
 const initialState = {
     mainIngredients: [],
@@ -20,8 +20,17 @@ export function constructorIngredientsReducer(state = initialState, action) {
         case DELETE_FROM_CONSTRUCTOR:
             return {
                 ...state, 
-                mainIngredients: state.mainIngredients.filter(item => item._id !== action.id),
                 // total: state.total - 
+                mainIngredients: state.mainIngredients.filter(item => item._id !== action.id),
+            }
+        case SET_SORTED_INGREDIENTS:
+            const dragIngredient = state.mainIngredients[action.dragId];
+            const sortedIngredients = [...state.mainIngredients];
+            sortedIngredients.splice(action.dragId, 1);
+            sortedIngredients.splice(action.hoverId, 0, dragIngredient);
+            return {
+                ...state,
+                mainIngredients: sortedIngredients
             }
         default:
             return state
