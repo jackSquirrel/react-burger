@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import styles from './ingredient-details.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components';
 
-// Компонент с содержимым о деталях ингридиента
+// КОМПОНЕНТ С СОДЕРЖИМЫМ О ДЕТАЛЯХ ИНГРИДИЕНТА
 function IngredientDetails() {
     const details = useSelector(store => store.ingredientDetails.ingredient);
 

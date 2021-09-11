@@ -17,15 +17,16 @@ const initialState = {
 export const ingredientsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_INGREDIENTS_REQUEST:
-            console.log('Идет загрузка...');
-            return { ...state, itemsRequest: true };
+            console.log('Здесь мог быть ваш loader...');
+            return { ...state, itemsRequest: true, itemsFaild: false };
         case GET_INGREDIENTS_SUCCESS:
             return {
                 ...state, itemsRequest: false, items: action.items
             }
         case GET_INGREDIENTS_FAILED:
+            console.log(action.error);
             return {
-                ...state, itemsRequest: false, itemsFaild: true
+                ...state, itemsRequest: false, itemsFaild: true, items: []
             }
         case SET_ACTIVE_TAB:
             return {

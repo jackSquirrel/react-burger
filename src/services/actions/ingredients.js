@@ -28,13 +28,13 @@ export function getIngredients() {
                         items
                     })
                 } else {
-                    return Promise.reject(`Ошибка ${data.success}`)
+                    return Promise.reject(data.message);
                 }
             })
-            .catch(err => {
-                console.log(err);
+            .catch(error => {
                 dispatch({
-                    type: GET_INGREDIENTS_FAILED
+                    type: GET_INGREDIENTS_FAILED,
+                    error
                 })
             })
     }

@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDrag } from "react-dnd";
 
-import { ingredientPropTypes } from '../../propTypes/propTypes';
 import styles from './burger-ingredients-item.module.css';
-
+import { useDrag } from 'react-dnd';
+import { ingredientPropTypes } from '../../propTypes/propTypes';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
-// Компонент карточки ингридиента
+// КОМПОНЕНТ ИНГРЕДИЕНТА
 function BurgerIngredientItem({ onOpen, data }) {
     const [, drag] = useDrag({
         type: 'ingredient',

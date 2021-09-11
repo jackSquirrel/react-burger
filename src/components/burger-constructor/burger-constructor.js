@@ -1,22 +1,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useDrop } from 'react-dnd';
 import uuid from 'react-uuid';
-// import PropTypes from 'prop-types';
 
 import styles from './burger-constructor.module.css';
 import TotalAmount from '../total-amount/total-amount';
-
-import { useDrop } from "react-dnd";
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ADD_TO_CONSTRUCTOR } from '../../services/actions/constructorIngredients';
 import { DECREASE_COUNTER, INCREASE_COUNTER } from '../../services/actions/ingredients';
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
-// Компонент конструктора бургера
+// КОНСТРУКТОР БУРГЕРОВ
 function BurgerConstructor() {
     const dispatch = useDispatch();
-    const { total, bun, main } = useSelector(store => ({
-        total: store.constructorIngredients.total,
+    const { bun, main } = useSelector(store => ({
         bun: store.constructorIngredients.bun,
         main: store.constructorIngredients.mainIngredients
     }))
@@ -35,7 +32,6 @@ function BurgerConstructor() {
 
     function onDropHandler(item) {
         if (item.type === 'bun' && Object.keys(bun).length) {
-            console.log('here');
             dispatch({ type: DECREASE_COUNTER, id: bun._id })
         }
         dispatch({ type: ADD_TO_CONSTRUCTOR, item });
@@ -56,7 +52,7 @@ function BurgerConstructor() {
                 /> : null }
 
                 {/* Основная часть, которую можно изменять (пока что нельзя) */}
-                <div className={ styles.constructor__scroll }>
+                <div className={ `${main.length > 5 ? styles.constructor__scroll : ''} ${styles.constructor__main}`}>
                     { main.map((item, index) => <BurgerConstructorItem 
                                             key={item.uniqueId} 
                                             item={item}
@@ -74,7 +70,7 @@ function BurgerConstructor() {
                 /> : null }
             </div>
 
-            <TotalAmount total={ total } />
+            <TotalAmount />
         </section>
     )
 }

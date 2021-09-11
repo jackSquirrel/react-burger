@@ -1,18 +1,22 @@
 import React, { useRef } from 'react';
+import { useDrag, useDrop } from 'react-dnd';
+import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import styles from './burger-constructor-item.module.css';
-import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch } from 'react-redux';
 import { DELETE_FROM_CONSTRUCTOR, SET_SORTED_INGREDIENTS } from '../../services/actions/constructorIngredients';
-import { useDrag, useDrop } from 'react-dnd';
 import { DECREASE_COUNTER } from '../../services/actions/ingredients';
+import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ingredientPropTypesUUID } from '../../propTypes/propTypes';
 
+// КОМПОНЕНТ ИНГРЕДИЕНТА В КОНСТРУКТОРЕ
 function BurgerConstructorItem ({ item, index }) {
     const { _id, name, price, image, uniqueId } = item;
 
     const ref = useRef(null);
     const dispatch = useDispatch();
 
+    // Сортировка массива элементов при перетаскивании
     const [, drop] = useDrop({
         accept: 'internalIngredients',
         hover: (item, monitor) => {
@@ -73,6 +77,12 @@ function BurgerConstructorItem ({ item, index }) {
             />
         </div>
     )
+}
+
+// Пропсы компонента
+BurgerConstructorItem.propTypes = {
+    item: ingredientPropTypesUUID.isRequired,
+    index: PropTypes.number.isRequired
 }
 
 export default BurgerConstructorItem;

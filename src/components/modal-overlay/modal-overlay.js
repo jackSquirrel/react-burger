@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './modal-overlay.module.css';
 
-// Компонент с подложкой для модального окна (затеменяет фон)
+// ПОДЛОЖКА МОДАЛЬНОГО ОКНА
 function ModalOverlay({ children, onClose }) {
     function onOverlayClose(e) {
         if (e.target === e.currentTarget) onClose();

@@ -1,15 +1,14 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
 import { getOrder } from '../../services/actions/order';
 import { CLOSE_MODAL } from '../../services/actions/modal';
+import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-// Компонент с итоговой суммой заказа
+// КОМПОНЕНТ С ИТОГОВОЙ СУММОЙ ЗАКАЗА
 function TotalAmount() {
-
     const dispatch = useDispatch();
 
     const isOrderModalOpen = useSelector(store => store.modal.isOrderModalOpen)

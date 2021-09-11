@@ -10,17 +10,16 @@ export function constructorIngredientsReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_TO_CONSTRUCTOR:
             if (action.item.type === 'bun') {
+                let total;
                 if (Object.keys(state.bun).length) {
-                    return {
-                        ...state,
-                        bun: action.item,
-                        total: state.total - state.bun.price*2 + action.item.price*2
-                    }
+                    total = state.total - state.bun.price*2 + action.item.price*2
+                } else {
+                    total = state.total + action.item.price*2
                 }
                 return {
                     ...state,
                     bun: action.item,
-                    total: state.total + action.item.price*2
+                    total
                 }
             }
             return {

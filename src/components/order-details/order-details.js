@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './order-details.module.css';
+import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import '@ya.praktikum/react-developer-burger-ui-components';
 
-// Компонент с содержимым модального окна с деталями заказа
+// СОДЕРЖИМОЕ МОДАЛЬНОГО ОКНА С ДЕТАЛЯМИ ЗАКАЗА
 function OrderDetails() {
     const orderNumber = useSelector(store => store.order.orderNumber)
 

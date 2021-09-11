@@ -1,10 +1,15 @@
 import { apiUrl } from '../api';
 import { OPEN_ORDER_MODAL } from './modal';
 
-export const GET_ORDER = 'GET_ORDER';
+export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
+export const GET_ORDER_REQUEST = 'GET_ORDER_REQUEST';
+export const GET_ORDER_ERROR = 'GET_ORDER_ERROR';
+
 
 export function getOrder(ingredients) {
     return function(dispatch) {
+        dispatch({ type: GET_ORDER_REQUEST });
+
         fetch(`${apiUrl}/api/orders`, {
             method: 'POST',
             headers: {
@@ -21,16 +26,23 @@ export function getOrder(ingredients) {
                 return Promise.reject(`Ошибка ${res.status}`);
             })
             .then(data => {
-                dispatch({
-                    type: GET_ORDER,
-                    order: data.order.number
-                })
-                dispatch({
-                    type: OPEN_ORDER_MODAL
-                })
+                if(data.success) {
+                    dispatch({
+                        type: GET_ORDER_SUCCESS,
+                        order: data.order.number
+                    })
+                    dispatch({
+                        type: OPEN_ORDER_MODAL
+                    })
+                } else {
+                    return Promise.reject(data.message);
+                }
             })
-            .catch(err => {
-                console.log(err);
+            .catch(error => {
+                dispatch({
+                    type: GET_ORDER_ERROR,
+                    error
+                })
             })
     }
 }

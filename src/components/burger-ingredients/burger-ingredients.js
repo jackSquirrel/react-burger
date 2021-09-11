@@ -1,14 +1,13 @@
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Tabs from '../tabs/tabs';
-import BurgerIngredientGroup from '../burger-ingredients-group/burger-ingredients-group';
 import styles from './burger-ingredients.module.css';
-
-import '@ya.praktikum/react-developer-burger-ui-components';
+import BurgerIngredientGroup from '../burger-ingredients-group/burger-ingredients-group';
+import Tabs from '../tabs/tabs';
 import { SET_ACTIVE_TAB } from '../../services/actions/ingredients';
+import '@ya.praktikum/react-developer-burger-ui-components';
 
-// Компонент выбора ингредиентов
+// КОМПОНЕНТ ВЫБОРА ИНГРЕДИЕНТОВ
 function BurgerIngredients() {
     const { ingredients, activeTab } = useSelector(store => ({
         ingredients: store.ingredients.items,
@@ -16,7 +15,7 @@ function BurgerIngredients() {
     }));
     const dispatch = useDispatch();
 
-    // Рефы для потсчета расстояния до верха страницы
+    // Рефы для посчета расстояния до верха страницы
     const containerRef = useRef(null);
     const bunsRef = useRef(null);
     const saucesRef = useRef(null);
@@ -26,7 +25,9 @@ function BurgerIngredients() {
     const distFromContainerToTop = containerRef.current ? containerRef.current.getBoundingClientRect() : null;
 
     // При прокрутке проверяем какая группа ингредиентов ближе к верху контейнера
+    // и выделяем активный таб
     function handleScroll() {
+        // Расстояния от верха блоков до верха контейнера
         const distFromBunsToParentTop = Math.abs(bunsRef.current.getBoundingClientRect().top - distFromContainerToTop.top);
         const distFromSaucesToParentTop = Math.abs(saucesRef.current.getBoundingClientRect().top - distFromContainerToTop.top);
         const distFromMainToParentTop = Math.abs(mainRef.current.getBoundingClientRect().top - distFromContainerToTop.top);

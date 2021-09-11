@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './tabs.module.css';
 import { SET_ACTIVE_TAB } from '../../services/actions/ingredients';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
+// ТАБЫ ДЛЯ ПЕРЕКЛЮЧЕНИЯ МЕЖДУ ГРУППАМИ ИНГРЕДИЕНТОВ
 function Tabs() {
     const { current } = useSelector(store => ({ current: store.ingredients.activeTab }));
     const dispatch = useDispatch();
